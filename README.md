@@ -6,7 +6,7 @@ Generate a fake page on the fly
 
 ## Install
 
-`composer require wpbp/fakepage:dev-master`
+`composer require wpbp/language:dev-master`
 
 [composer-php52](https://github.com/composer-php52/composer-php52) supported.
 
