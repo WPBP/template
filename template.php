@@ -41,7 +41,7 @@ if ( !function_exists( 'wpbp_get_template_part' ) ) {
             }
 
             // Allow 3rd party plugin filter template file from their plugin
-            $template = apply_filters( 'wpbp_get_template_part', $template, $slug, $name );
+            $template = apply_filters( 'wpbp_get_template_part', $template, $slug, $name, $plugin_slug );
 
             if ( $template && $include === true ) {
                     load_template( $template, false );
@@ -102,7 +102,7 @@ if ( !function_exists( 'wpbp_get_email_template' ) ) {
             }
 
             // Allow 3rd party plugin filter template file from their plugin
-            $template = apply_filters( 'wpbp_get_email_template', $template, $name, $prefix );
+            $template = apply_filters( 'wpbp_get_email_template', $template, $name, $prefix, $plugin_slug );
 
             return wpautop( file_get_contents( $template ) );
     }
