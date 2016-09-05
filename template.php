@@ -20,8 +20,8 @@ if ( !function_exists( 'wpbp_get_template_part' ) ) {
      */
     function wpbp_get_template_part( $plugin_slug, $slug, $name = '', $include = true ) {
             $template = '';
-            $path = plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'templates/';
             $plugin_slug = $plugin_slug . '/';
+            $path = WP_PLUGIN_DIR . '/'. $plugin_slug . 'templates/';
 
             // Look in yourtheme/slug-name.php and yourtheme/plugin-name/slug-name.php
             if ( $name ) {
@@ -63,8 +63,8 @@ if ( !function_exists( 'wpbp_get_email_template' ) ) {
     function wpbp_get_email_template( $plugin_slug, $slug, $name, $prefix = '' ) {
             $template = '';
             $folder = 'email-templates/';
-            $path = plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $folder;
             $plugin_slug = $plugin_slug . '/';
+            $path = WP_PLUGIN_DIR . '/'. $plugin_slug . $folder;
             $locale = apply_filters( "plugin_locale", get_locale(), $plugin_slug );
 
             // Look in yourtheme/plugin-name/{locale}/name.tpl and yourtheme/plugin-name/email-templates/{locale}/name.tpl
