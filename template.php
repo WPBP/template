@@ -12,15 +12,16 @@ if ( !function_exists( 'wpbp_get_template_part' ) ) {
      * Load template files of the plugin also include a filter pn_get_template_part<br>
      * Based on WooCommerce function<br>
      * 
+     * @param string $plugin_slug
      * @param string $slug
      * @param string $name
      * @param string $include
      * @return string
      */
-    function wpbp_get_template_part( $slug, $name = '', $include = true ) {
+    function wpbp_get_template_part( $plugin_slug, $slug, $name = '', $include = true ) {
             $template = '';
             $path = plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'templates/';
-            $plugin_slug = $slug . '/';
+            $plugin_slug = $plugin_slug . '/';
 
             // Look in yourtheme/slug-name.php and yourtheme/plugin-name/slug-name.php
             if ( $name ) {
@@ -54,15 +55,16 @@ if ( !function_exists( 'wpbp_get_email_template' ) ) {
     /**
     * Load email template files of the plugin also include a filter pn_get_email_template<br>
     * 
+    * @param string $plugin_slug
     * @param string $name
     * @param string $prefix
     * @return string
     */
-    function wpbp_get_email_template( $slug, $name, $prefix = '' ) {
+    function wpbp_get_email_template( $plugin_slug, $slug, $name, $prefix = '' ) {
             $template = '';
             $folder = 'email-templates/';
             $path = plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $folder;
-            $plugin_slug = $slug . '/';
+            $plugin_slug = $plugin_slug . '/';
             $locale = apply_filters( "plugin_locale", get_locale(), $plugin_slug );
 
             // Look in yourtheme/plugin-name/{locale}/name.tpl and yourtheme/plugin-name/email-templates/{locale}/name.tpl
