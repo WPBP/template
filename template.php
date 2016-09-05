@@ -1,28 +1,26 @@
 <?php
-
 /**
  *
- * @author  Mte90 <mte90net@gmail.com>
+ * @author    Mte90 <mte90net@gmail.com>
  * @license   GPL-2.0+
- * @copyright 2014-2015
- * @since    1.0.0
+ * @copyright 2014-2016
+ * @since     1.0.0
  */
 
-/**
- * Load template files of the plugin also include a filter pn_get_template_part<br>
- * Based on WooCommerce function<br>
- * 
- * @param string $slug
- * @param string $name
- * @param string $include
- * @return string
- */
 if ( !function_exists( 'wpbp_get_template_part' ) ) {
+    /**
+     * Load template files of the plugin also include a filter pn_get_template_part<br>
+     * Based on WooCommerce function<br>
+     * 
+     * @param string $slug
+     * @param string $name
+     * @param string $include
+     * @return string
+     */
     function wpbp_get_template_part( $slug, $name = '', $include = true ) {
             $template = '';
             $path = plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . 'templates/';
-            $plugin = Plugin_Name::get_instance();
-            $plugin_slug = $plugin->get_plugin_slug() . '/';
+            $plugin_slug = $slug . '/';
 
             // Look in yourtheme/slug-name.php and yourtheme/plugin-name/slug-name.php
             if ( $name ) {
@@ -60,13 +58,12 @@ if ( !function_exists( 'wpbp_get_email_template' ) ) {
     * @param string $prefix
     * @return string
     */
-    function wpbp_get_email_template( $name, $prefix = '' ) {
+    function wpbp_get_email_template( $slug, $name, $prefix = '' ) {
             $template = '';
             $folder = 'email-templates/';
             $path = plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $folder;
-            $plugin = Plugin_Name::get_instance();
-            $plugin_slug = $plugin->get_plugin_slug() . '/';
-            $locale = apply_filters( "plugin_locale", get_locale(), $plugin->get_plugin_slug() );
+            $plugin_slug = $slug . '/';
+            $locale = apply_filters( "plugin_locale", get_locale(), $plugin_slug );
 
             // Look in yourtheme/plugin-name/{locale}/name.tpl and yourtheme/plugin-name/email-templates/{locale}/name.tpl
             if ( empty( $template ) ) {
