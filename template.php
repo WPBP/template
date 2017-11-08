@@ -31,8 +31,14 @@ if ( !function_exists( 'wpbp_get_template_part' ) ) {
             }
 
             // Get default slug-name.php
-            if ( !$template && $name && file_exists( $path . "{$slug}-{$name}.php" ) ) {
+            if ( !$template ) {
+                if ( empty( $name ) ) {
+                    if ( file_exists( $path . "{$slug}.php" ) ) {
+                       $template = $path . "{$slug}.php";
+                    }
+                } else if ( file_exists( $path . "{$slug}-{$name}.php" ) ) {
                     $template = $path . "{$slug}-{$name}.php";
+                }
             }
 
             // If template file doesn't exist, look in yourtheme/slug.php and yourtheme/plugin-name/slug.php
