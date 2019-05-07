@@ -15,7 +15,7 @@ if ( !function_exists( 'wpbp_get_template_part' ) ) {
      * @param string $plugin_slug
      * @param string $slug
      * @param string $name
-     * @param string $include
+     * @param bool   $include
      * @return string
      */
     function wpbp_get_template_part( $plugin_slug, $slug, $name = '', $include = true ) {
