@@ -18,16 +18,16 @@ if ( !function_exists( 'wpbp_get_template_part' ) ) {
      * @param bool   $include
      * @return string
      */
-    function wpbp_get_template_part( $plugin_slug, $slug, $name = '', $include = true ) {
+    function wpbp_get_template_part( $plugin_slug, $slug, $name = '', $include = true, $args = array() ) {
             $template = '';
             $plugin_slug = $plugin_slug . '/';
             $path = WP_PLUGIN_DIR . '/'. $plugin_slug . 'templates/';
 
             // Look in yourtheme/slug-name.php and yourtheme/plugin-name/slug-name.php
             if ( $name ) {
-                    $template = locate_template( array( "{$slug}-{$name}.php", $plugin_slug . "{$slug}-{$name}.php" ) );
+                    $template = locate_template( array( "{$slug}-{$name}.php", $plugin_slug . "{$slug}-{$name}.php" ), false, true, $args );
             } else {
-                    $template = locate_template( array( "{$slug}.php", $plugin_slug . "{$slug}.php" ) );
+                    $template = locate_template( array( "{$slug}.php", $plugin_slug . "{$slug}.php" ), false, true, $args );
             }
 
             // Get default slug-name.php
@@ -43,14 +43,14 @@ if ( !function_exists( 'wpbp_get_template_part' ) ) {
 
             // If template file doesn't exist, look in yourtheme/slug.php and yourtheme/plugin-name/slug.php
             if ( !$template ) {
-                    $template = locate_template( array( "{$slug}.php", $plugin_slug . "{$slug}.php" ) );
+                    $template = locate_template( array( "{$slug}.php", $plugin_slug . "{$slug}.php" ), false, true, $args );
             }
 
             // Allow 3rd party plugin filter template file from their plugin
-            $template = apply_filters( 'wpbp_get_template_part', $template, $slug, $name, $plugin_slug );
+            $template = apply_filters( 'wpbp_get_template_part', $template, $slug, $name, $plugin_slug, $args );
 
             if ( $template && $include === true ) {
-                    load_template( $template, false );
+                    load_template( $template, false, $args );
             } else if ( $template && $include === false ) {
                     return $template;
             }
@@ -66,7 +66,7 @@ if ( !function_exists( 'wpbp_get_email_template' ) ) {
     * @param string $prefix
     * @return string
     */
-    function wpbp_get_email_template( $plugin_slug, $slug, $name, $prefix = '' ) {
+    function wpbp_get_email_template( $plugin_slug, $slug, $name, $prefix = '', $args = array() ) {
             $template = '';
             $folder = 'email-templates/';
             $plugin_slug = $plugin_slug . '/';
@@ -88,7 +88,7 @@ if ( !function_exists( 'wpbp_get_email_template' ) ) {
                             array_unshift( $search, $plugin_slug . $folder . $locale . '/' . $prefix . '-' . $name . '.tpl' );
                     }
 
-                    $template = locate_template( $search );
+                    $template = locate_template( $search, false, true, $args );
             }
 
             // Load the template from plugin folders
@@ -108,7 +108,7 @@ if ( !function_exists( 'wpbp_get_email_template' ) ) {
             }
 
             // Allow 3rd party plugin filter template file from their plugin
-            $template = apply_filters( 'wpbp_get_email_template', $template, $name, $prefix, $plugin_slug );
+            $template = apply_filters( 'wpbp_get_email_template', $template, $name, $prefix, $plugin_slug, $args );
 
             return wpautop( file_get_contents( $template ) );
     }
