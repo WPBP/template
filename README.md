@@ -19,7 +19,7 @@ Templating system in WordPress (woocommerce like) also for email with l10n suppo
 // This is like the woocommerce function
 function load_content_demo( $original_template ) {
         if ( is_singular( 'demo' ) && in_the_loop() ) {
-            return wpbp_get_template_part( 'plugin-name-folder', 'content', 'demo', false );
+            return wpbp_get_template_part( 'plugin-name-folder', 'content', 'demo', false, array() ); // The last parameter is for arguments to pass to the template but is not mandatory
         } else {
             return $original_template;
         }
