@@ -4,7 +4,7 @@
 
 Templating system in WordPress (woocommerce like) also for email with l10n support.  
 
-* Your plugin as a `templates` folder that will be loaded by the plugin based on the code
+* Your plugin will be able to provide a `templates` folder that will be loaded by the plugin
 * If a theme has a folder with the same slug name of the plugin will look if the file exist there
 
 ## Install
@@ -29,6 +29,8 @@ add_filter( 'template_include', 'load_content_demo' );
 // This is an extended version that search for folder with names based on locales like it_IT
 $get_template_email = wpbp_get_template_part( 'plugin-name-folder' , 'header', 'prefix' );
 ```
+
+In this case will look for a `content-demo.php` file.
 
 `wpbp_get_template_part` is the same of https://developer.wordpress.org/reference/hooks/get_template_part/ this filter, the difference is that this one is executed by this library
 
